@@ -2,6 +2,8 @@
 <html>
 <head>
     <title>JsAndDom</title>
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	 
 </head>
 <body>
 	<div id="div1">
@@ -9,7 +11,7 @@
 
 	<div id="foo" class="bar" style="margin-top:10px;">
 	  <div id="fizz" class="buzz">
-	    <a class="link" href="#">sample anchor</a>
+	    <a class="link" id="test" href="#">sample anchor</a>
 	  </div>
 	</div>
 
@@ -20,6 +22,67 @@
 	<div id="foobar" style="margin-top:10px;">
 	</div>
 
-	<script src="jsanddom.js" type="text/javascript"></script>
+	<script>
+	function addCheckBox(optionList){
+	
+	
+		$.each(optionList, function (i, ol) {
+
+			$('#foobar').append('<input type="checkbox" class="myCheckbox" />');
+			$('#foobar').append('<label>'+ol+'</label>');
+			
+		});
+	
+		$('#foobar').append('<a href="#" id="selectAll">Select All</a>');
+		$('#foobar').append('<a href="#" id="removeAll">Remove All</a>');
+	
+		$('#selectAll').on("click",function() {
+				$(".myCheckbox").prop('checked', true);
+		});
+		
+		$('#removeAll').on("click",function() {
+				$(".myCheckbox").prop('checked', false);
+		});
+	
+	
+	
+	}
+	
+	 function addLiToUl(optionList){
+	
+		$.each(optionList, function (i, ol) {
+
+			$("#list1").append('<li>'+ol +'</li>');
+			
+		});
+	
+	}
+	
+	 function getDropDownList(optionList) {
+		var combo = $("<select></select>").attr("id", "select").attr("name", "data");
+
+		$.each(optionList, function (i, ol) {
+			combo.append("<option>" + ol + "</option>");
+		});
+
+		$("#div1").append(combo);
+		
+		 var button= $('<input/>').attr({ type: 'button', id:'btn1', value:'Click'});
+		 $("#div1").append(button);
+		 
+		 $('#btn1').on("click",function() {
+			console.log("selected Value is "+$('#select').val()); 
+		});
+	}
+
+	
+	var data= ['apple', 'banana', 'orange', 'kiwi', 'pear', 'plum', 'strawberry'];
+	
+	getDropDownList(data);
+	addLiToUl(data);
+	addCheckBox(data);
+	</script>
+	
+	<!--<script src="jsanddom.js" type="text/javascript"></script>-->
 </body>
 </html>
